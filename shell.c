@@ -16,6 +16,8 @@ void shell(void)
 	args = parse_line(line);
 
 	free(line);
+	if (!args)
+		return;
 
 	for (; args[i]; i++)
 	{
