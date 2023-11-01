@@ -13,9 +13,9 @@ void shell(void)
 
 	do
 	{
-		write(STDOUT_FILENO, "sh$ ", 5);
+		write(STDOUT_FILENO, "$ ", 3);
 		line = _getline();
-		args = parse(line);
+		args = parse_line(line);
 		status = execute(args);
 
 		free(line);
