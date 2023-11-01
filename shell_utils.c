@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "utils.h"
 
 /**
  * _getline - reads a line from stdin
@@ -51,36 +51,10 @@ char *_getline(void)
 
 char **parse_line(char *line)
 {
-	int buffersize = TOKEN_SIZE, index = 0;
-	char **tokens = (char **)malloc(sizeof(char *) * buffersize);
-	char *token;
+	char **tokens;
 
-	if (!token)
-	{
-		perror("Unable to allocate buffer");
-		exit(EXIT_FAILURE);
-	}
-
-	token = _strtok(line, DELIMETERS);
-	while (token != NULL)
-	{
-		tokens[index] = token;
-		index++;
-
-		if (index >= buffersize)
-		{
-			int oldsize = buffersize;
-
-			buffersize += TOKEN_SIZE;
-			tokens = _realloc(tokens, oldsize, buffersize);
-			if (!tokens)
-			{
-				perror("Unable to allocate buffer");
-				exit(EXIT_FAILURE);
-			}
-		}
-		token = _strtok(NULL, DELIMETERS);
-	}
-	tokens[index] = NULL;
+	if (line == NULL)
+		return (NULL);
+	tokens = strtow(line);
 	return (tokens);
 }

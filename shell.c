@@ -9,16 +9,18 @@ void shell(void)
 {
 	char *line;
 	char **args;
-	int status;
+	int i = 0;
 
-	do
+	write(STDOUT_FILENO, "$ ", 3);
+	line = _getline();
+	args = parse_line(line);
+
+	free(line);
+
+	for (; args[i]; i++)
 	{
-		write(STDOUT_FILENO, "$ ", 3);
-		line = _getline();
-		args = parse_line(line);
-		status = execute(args);
-
-		free(line);
-		free(args);
-	} while (status);
+		printf("%s\n", args[i]);
+		free(args[i]);
+	}
+	free(args);
 }

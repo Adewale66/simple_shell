@@ -9,14 +9,17 @@
 
 #define BUFFER_SIZE 1024
 #define TOKEN_SIZE 64
-#define DELIMETERS " \a\t\r\n"
+#define DELIMITERS           \
+	{                        \
+		";", "#", "&&", "||" \
+	}
 
 /* Function Prototypes */
 
 int _getchar(void);
 void *_realloc(void *, unsigned int, unsigned int);
 char *_memcpy(char *, char *, unsigned int);
-char *_strtok(char *, const char *);
-unsigned int is_delim(char, const char *);
+char **strtow(char *);
+int _strlen(char *);
 
 #endif

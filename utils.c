@@ -63,69 +63,67 @@ char *_memcpy(char *dest, char *src, unsigned int n)
 
 	return (dest);
 }
-
 /**
- * _strtok -  function that splits a string into tokens
- * @str: string to split
- * @delim: delimiter
- * Return: pointer to string
+ * _strlen - gets the length of a string
+ * @s: string to count
+ * Return: int
  */
 
-char *_strtok(char *str, const char *delim)
+int _strlen(char *s)
 {
-	static char *string_backup;
-	char *r;
+	int l = 0;
 
-	if (str == NULL)
-		str = string_backup;
-	if (str == NULL)
-		return (NULL);
-
-	while (1)
-	{
-		if (is_delim(*str, delim))
-		{
-			str++;
-			continue;
-		}
-		if (*str == '\0')
-			return (NULL);
-		break;
-	}
-	r = str;
-	while (1)
-	{
-		if (*str == '\0')
-		{
-			string_backup = str;
-			return (r);
-		}
-		if (is_delim(*str, delim))
-		{
-			*str = '\0';
-			string_backup = str + 1;
-			return (r);
-		}
-		str++;
-	}
+	while (s[l] != '\0' && s[l] != ' ')
+		l++;
+	return (l);
 }
 
 /**
- * is_delim -  function that checks if a character is a delimiter
- * @c: character to check
- * @delim: delimiter
- * Return: 1 if true, 0 if false
+ * strtow - splits a string into words
+ * @str: string to split
+ * Return: pointer to cahr pointer
  */
 
-unsigned int is_delim(char c, const char *delim)
+char **strtow(char *str)
 {
-	int i = 0;
+	char **t;
+	int i = 0, l = 0, strle, j;
 
-	while (delim[i] != '\0')
+	if (str == NULL || *str == '\0')
+		return (NULL);
+	for (; str[i] != '\0'; i++)
+		if (str[i] != ' ')
+			if (i - 1 < 0 || str[i - 1] == ' ')
+				l++;
+	if (l == 0)
+		return (NULL);
+	t = (char **)malloc(sizeof(char *) * (l + 1));
+	if (t == NULL)
+		return (NULL);
+	for (i = 0; i < l; i++)
 	{
-		if (c == delim[i])
-			return (1);
-		i++;
+		strle = 0;
+		while (*str != '\0')
+		{
+			if (*str != ' ')
+			{
+				strle = _strlen(str);
+				break;
+			}
+			str++;
+		}
+		t[i] = (char *)malloc(sizeof(char) * strle + 1);
+		if (t[i] == NULL)
+		{
+			for (j = 0; j < i; j++)
+				free(t[j]);
+			free(t);
+			return (NULL);
+		}
+		for (j = 0; j < strle; j++, str++)
+			t[i][j] = *str;
+		t[i][j] = '\0';
 	}
-	return (0);
+	t[l] = NULL;
+	return (t);
 }
