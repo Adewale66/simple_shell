@@ -1,12 +1,13 @@
 #include "shell.h"
 
 /**
- * main - Starts the shell
+ * main - main program
  * Return: 0 on success
  */
 
 int main(void)
 {
-	printf("Hello form shell\n");
-	return (0);
+	shell();
+
+	return (EXIT_SUCCESS);
 }
