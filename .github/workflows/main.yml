@@ -1,0 +1,26 @@
+name: CI pipeline
+
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+jobs:
+    workflow_check:
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v3
+            - name: install betty
+              run: |
+                  git clone https://github.com/Adewale66/alx-tools.git
+                  cd alx-tools
+                  chmod +x install.sh
+                  ./install.sh
+                  cd ..
+                  betty *c
+            - name: Check if C files complie
+              run: |
+                  echo install gcc
+                  sudo apt-get update
+                  sudo apt-get install -y gcc git
+                  gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *c
