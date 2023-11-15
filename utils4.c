@@ -16,7 +16,7 @@ void create_path(char *full_command, dir_node *current, struct dirent *entry)
 }
 
 /**
- * _strstr - function that locates a substring.
+ * __strstr - function that locates a substring.
  * @hay: char pointer
  * @needle: char pointer
  *
