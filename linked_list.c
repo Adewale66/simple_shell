@@ -64,6 +64,7 @@ void free_list(dir_node *head)
 		dir_node *temp = current;
 
 		current = current->next;
+		free(temp->dir);
 		free(temp);
 	}
 }

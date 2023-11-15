@@ -5,14 +5,16 @@
  * @s: array of strings
  * @filename: arguments for file name
  * @stat: status code
+ * @env: environment
+ * @li: line
  * Return: int
  */
-int check_for_builtin(char **s, char *filename, int stat)
+int check_for_builtin(char **s, char *filename, int stat, char *env, char *li)
 {
 	int i = -2;
 
 	if (_strcmp(s[0], "exit") == 0)
-		exit_shell(s, filename, stat);
+		exit_shell(s, filename, stat, env, li);
 	if (_strcmp(s[0], "env") == 0)
 		i = shell_env();
 	if (_strcmp(s[0], "echo") == 0)
@@ -55,9 +57,14 @@ char *_getenv(char *name)
 		{
 			r = _strdup(env_val[1]);
 			if (r == NULL)
+			{
+				free_array(env_val);
 				return (NULL);
+			}
+			free_array(env_val);
 			return (r);
 		}
+		free_array(env_val);
 		i++;
 	}
 	return (NULL);

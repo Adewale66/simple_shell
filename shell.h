@@ -51,10 +51,10 @@ int handle_or(char *line, char *filename, int status);
 
 /* fucntion prototypes for builtin*/
 
-int exit_shell(char **, char *, int);
+int exit_shell(char **, char *, int, char *, char *);
 int shell_env(void);
 int shell_echo(char **arg);
-int check_for_builtin(char **args, char *, int);
+int check_for_builtin(char **args, char *, int, char *, char *);
 int change_dir(char *path, char *filename);
 int _setenv(char *name, char *value, int overwrite);
 int _unsetenv(char *name);
