@@ -53,11 +53,7 @@ int shell_env(void)
 		status = -1;
 	}
 	else
-	{
 		wait(&status);
-		if (WIFEXITED(status))
-			status = WEXITSTATUS(status);
-	}
 	return (status);
 }
 

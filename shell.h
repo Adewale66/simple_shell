@@ -80,6 +80,7 @@ void free_strings(int count, ...);
 void create_path(char *full_command, dir_node *current, struct dirent *entry);
 int update_env(char *name, char *value, int fount_idx);
 int create_env(char *name, char *value, int size);
+char *__strstr(char *hay, char *needle);
 
 /** linked list functions */
 

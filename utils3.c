@@ -68,7 +68,8 @@ char *convert_unsigned_int(unsigned int num)
 	i = length - 1;
 	str[i + 1] = '\0';
 
-	do {
+	do
+	{
 		str[i--] = num % 10 + '0';
 		num /= 10;
 	} while (num > 0);
@@ -94,7 +95,7 @@ char *replace_string(char *original, char *pattern, char *replacement)
 	int count = 0;
 	int len_until_pattern;
 
-	for (ins = original; (tmp = strstr(ins, pattern)); ++count)
+	for (ins = original; (tmp = __strstr(ins, pattern)); ++count)
 	{
 		ins = tmp + len_pattern;
 	}
@@ -110,7 +111,7 @@ char *replace_string(char *original, char *pattern, char *replacement)
 	ins = result;
 	while (count--)
 	{
-		tmp = strstr(original, pattern);
+		tmp = __strstr(original, pattern);
 		len_until_pattern = tmp - original;
 		_strncpy(ins, original, len_until_pattern);
 		ins += len_until_pattern;
