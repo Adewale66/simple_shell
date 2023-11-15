@@ -1,13 +1,18 @@
 #include "shell.h"
 
 /**
- * main - main program
- * Return: 0 on success
+ * main - Entry point
+ * @argc: number of arguments
+ * @argv: array of arguments
+ * Return: EXIT_STATUS
  */
 
-int main(void)
+int main(int argc, char *argv[])
 {
-	shell();
-
-	return (EXIT_SUCCESS);
+	if (argc == 2)
+	{
+		return (handle_file(argv[1], argv[0]));
+	}
+	else
+		return (shell(argv[0]));
 }

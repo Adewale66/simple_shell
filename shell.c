@@ -1,28 +1,32 @@
 #include "shell.h"
 
 /**
- * shell - Starts the shell
- * Return: void
+ * shell - Entry point for the shell
+ * @filename: name of the file
+ * Return: EXIT_STATUS
  */
 
-void shell(void)
+int shell(char *filename)
 {
 	char *line;
-	char **args;
-	int i = 0;
+	int stat_code = 0;
+	int multiple = -1;
 
-	write(STDOUT_FILENO, "$ ", 3);
-	line = _getline();
-	args = parse_line(line);
-
-	free(line);
-	if (!args)
-		return;
-
-	for (; args[i]; i++)
+	while (1)
 	{
-		printf("%s\n", args[i]);
-		free(args[i]);
+		if (isatty(STDIN_FILENO))
+			write(STDIN_FILENO, "$ ", 2);
+		line = read_line();
+		if (line == NULL && isatty(STDIN_FILENO))
+			continue;
+		else if (line == NULL && !isatty(STDIN_FILENO))
+			return (stat_code);
+		multiple = check_for_multiple(line);
+		if (multiple > 0)
+			stat_code = handle_multiple(line, multiple, filename, stat_code);
+		else if (multiple == 0)
+			stat_code = 0;
+		else
+			stat_code = parse_line(line, filename, stat_code);
 	}
-	free(args);
 }
