@@ -81,6 +81,7 @@ void create_path(char *full_command, dir_node *current, struct dirent *entry);
 int update_env(char *name, char *value, int fount_idx);
 int create_env(char *name, char *value, int size);
 char *__strstr(char *hay, char *needle);
+int free_handler(char *fn, char **a, char **pd, char *l, char *e, dir_node *h);
 
 /** linked list functions */
 

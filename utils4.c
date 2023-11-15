@@ -42,3 +42,23 @@ char *__strstr(char *hay, char *needle)
 	}
 	return ('\0');
 }
+
+/**
+ * free_handler - handles errors
+ * @fn: name of file
+ * @a: array of strings
+ * @h: head of linked list
+ * @e: pointer to environment
+ * @l: pointer to line
+ * @pd: array of strings
+ * Return: 127
+ */
+
+int free_handler(char *fn, char **a, char **pd, char *l, char *e, dir_node *h)
+{
+	path_error_handler(fn, a[0]);
+	free_strings(2, e, l);
+	free_arr_list(a, h);
+	free(pd);
+	return (127);
+}

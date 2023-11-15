@@ -65,13 +65,7 @@ int parse_line(char *line, char *filename, int status_code)
 		insertNode(&head, path_dirs[i++]);
 	cmd = check_path(head, args[0]);
 	if (cmd == NULL)
-	{
-		path_error_handler(filename, args[0]);
-		free_strings(2, env, line);
-		free_arr_list(args, head);
-		free(path_dirs);
-		return (127);
-	}
+		return (free_handler(filename, args, path_dirs, line, env, head));
 	status = execute(args, cmd);
 	free_arr_list(args, head);
 	free_strings(3, env, line, cmd);
