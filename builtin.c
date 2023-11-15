@@ -5,9 +5,11 @@
  * @s: array of strings
  * @filename: names of strings passed via command line
  * @stat: status code
+ * @env: environment
+ * @line: line
  * Return: 0
  */
-int exit_shell(char **s, char *filename, int stat)
+int exit_shell(char **s, char *filename, int stat, char *env, char *line)
 {
 	int status;
 
@@ -19,7 +21,7 @@ int exit_shell(char **s, char *filename, int stat)
 	}
 	else
 		status = stat;
-
+	free_strings(2, env, line);
 	free_array(s);
 	exit(status);
 }

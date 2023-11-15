@@ -24,27 +24,31 @@ char *read_line(void)
 
 /**
  * parse_line - parses a line into an array of strings
- * @variable: pointer to the line
+ * @line: pointer to the line
  * @filename: name of file
  * @status_code: status code of shell
  * Return: array of strings
  */
 
-int parse_line(char *variable, char *filename, int status_code)
+int parse_line(char *line, char *filename, int status_code)
 {
 	char *env = _getenv("PATH"), *cmd, **path_dirs, **args;
 	dir_node *head = NULL;
 	int i = 0, status, builtin_check;
 
-	args = strtow(variable, ' ');
+	args = strtow(line, ' ');
 	if (!args)
 	{
-		free_strings(2, env, variable);
+		free_strings(2, env, line);
 		return (0);
 	}
-	builtin_check = check_for_builtin(args, filename, status_code);
+	builtin_check = check_for_builtin(args, filename, status_code, env, line);
 	if (builtin_check != -2)
+	{
+		free_array(args);
+		free_strings(2, env, line);
 		return (builtin_check);
+	}
 	path_dirs = strtow(env, ':');
 	if (path_dirs == NULL)
 	{
@@ -53,7 +57,7 @@ int parse_line(char *variable, char *filename, int status_code)
 			status = execute(args, args[0]);
 		else
 			path_error_handler(filename, args[0]);
-		free_strings(2, env, variable);
+		free_strings(2, env, line);
 		free_array(args);
 		return (status);
 	}
@@ -61,15 +65,11 @@ int parse_line(char *variable, char *filename, int status_code)
 		insertNode(&head, path_dirs[i++]);
 	cmd = check_path(head, args[0]);
 	if (cmd == NULL)
-	{
-		path_error_handler(filename, args[0]);
-		free_strings(2, env, variable);
-		free_arr_list(args, head);
-		return (127);
-	}
+		return (free_handler(filename, args, path_dirs, line, env, head));
 	status = execute(args, cmd);
 	free_arr_list(args, head);
-	free_strings(3, env, variable, cmd);
+	free_strings(3, env, line, cmd);
+	free(path_dirs);
 	return (status);
 }
 

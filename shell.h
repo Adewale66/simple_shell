@@ -51,10 +51,10 @@ int handle_or(char *line, char *filename, int status);
 
 /* fucntion prototypes for builtin*/
 
-int exit_shell(char **, char *, int);
+int exit_shell(char **, char *, int, char *, char *);
 int shell_env(void);
 int shell_echo(char **arg);
-int check_for_builtin(char **args, char *, int);
+int check_for_builtin(char **args, char *, int, char *, char *);
 int change_dir(char *path, char *filename);
 int _setenv(char *name, char *value, int overwrite);
 int _unsetenv(char *name);
@@ -81,6 +81,7 @@ void create_path(char *full_command, dir_node *current, struct dirent *entry);
 int update_env(char *name, char *value, int fount_idx);
 int create_env(char *name, char *value, int size);
 char *__strstr(char *hay, char *needle);
+int free_handler(char *fn, char **a, char **pd, char *l, char *e, dir_node *h);
 
 /** linked list functions */
 
