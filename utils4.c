@@ -67,7 +67,7 @@ int free_handler(char *fn, char **a, char **pd, char *l, char *e, dir_node *h)
  * create_file - creates env file
  * Return: void
  */
-void create_file()
+void create_file(void)
 {
 	char *file = "env.sh";
 	int fd;

@@ -17,20 +17,20 @@ void path_error_handler(char *filename, char *command)
 
 /**
  * exit_error_handler - handles errors for exit
- * @filename: pointer to filename
- * @command: pointer to command
+ * @file: pointer to file
+ * @cmd: pointer to command
  * @e: env
  * @li: line
  * @status: status code
  * Return: void
  */
-void exit_error_handler(char *filename, char **command, int status, char *e, char *li)
+void exit_error_handler(char *file, char **cmd, int status, char *e, char *li)
 {
-	write(STDERR_FILENO, filename, _strlen(filename));
+	write(STDERR_FILENO, file, _strlen(file));
 	write(STDERR_FILENO, ": 1: exit: Illegal number: ", 27);
-	write(STDERR_FILENO, command[1], _strlen(command[1]));
+	write(STDERR_FILENO, cmd[1], _strlen(cmd[1]));
 	write(STDERR_FILENO, "\n", 1);
-	free_array(command);
+	free_array(cmd);
 	free_strings(2, e, li);
 	exit(status);
 }
