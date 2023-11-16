@@ -94,11 +94,11 @@ char *check_for_access(char *args);
 /* file handlers*/
 int handle_file(char *filename, char *program_name);
 int parse_file(char *filename, char *program_name);
-void create_file();
+void create_file(void);
 
 /* error handlers*/
 void path_error_handler(char *filename, char *command);
-void exit_error_handler(char *filename, char **command, int status, char *env, char *li);
+void exit_error_handler(char *fi, char **co, int status, char *env, char *li);
 void cd_error_handler(char *filename, char *command);
 
 #endif
