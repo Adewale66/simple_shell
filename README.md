@@ -8,7 +8,7 @@ This project is an application of the shell created as a Benchmark Project for t
 
 ### COPYRIGHT
 
-Copyright (C) 2022 by Adewale Kujore and Uzochi Emeka. All rights reserved.
+Copyright (C) 2023 by Adewale Kujore and Uzochi Emeka. All rights reserved.
 
 ### Environment
 
