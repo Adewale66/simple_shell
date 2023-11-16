@@ -19,7 +19,7 @@ int handle_file(char *filename, char *program_name)
 	write(STDERR_FILENO, filename, _strlen(filename));
 	write(STDERR_FILENO, "\n", 1);
 
-	return (2);
+	return (127);
 }
 
 /**
