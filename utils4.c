@@ -62,3 +62,29 @@ int free_handler(char *fn, char **a, char **pd, char *l, char *e, dir_node *h)
 	free(pd);
 	return (127);
 }
+
+/**
+ * create_file - creates env file
+ * Return: void
+ */
+void create_file()
+{
+	char *file = "env.sh";
+	int fd;
+	ssize_t bytes;
+
+	fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (fd == -1)
+	{
+		perror("open");
+		exit(EXIT_FAILURE);
+	}
+	bytes = write(fd, "#!/bin/sh\nprintenv", 18);
+
+	if (bytes == -1)
+	{
+		perror("write");
+		exit(EXIT_FAILURE);
+	}
+	close(fd);
+}

@@ -17,7 +17,7 @@ int exit_shell(char **s, char *filename, int stat, char *env, char *line)
 	{
 		status = _atoi(s[1]);
 		if (status < 0)
-			exit_error_handler(filename, s[1], 2);
+			exit_error_handler(filename, s, 2, env, line);
 	}
 	else
 		status = stat;

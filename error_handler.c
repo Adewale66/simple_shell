@@ -19,15 +19,19 @@ void path_error_handler(char *filename, char *command)
  * exit_error_handler - handles errors for exit
  * @filename: pointer to filename
  * @command: pointer to command
+ * @e: env
+ * @li: line
  * @status: status code
  * Return: void
  */
-void exit_error_handler(char *filename, char *command, int status)
+void exit_error_handler(char *filename, char **command, int status, char *e, char *li)
 {
 	write(STDERR_FILENO, filename, _strlen(filename));
 	write(STDERR_FILENO, ": 1: exit: Illegal number: ", 27);
-	write(STDERR_FILENO, command, _strlen(command));
+	write(STDERR_FILENO, command[1], _strlen(command[1]));
 	write(STDERR_FILENO, "\n", 1);
+	free_array(command);
+	free_strings(2, e, li);
 	exit(status);
 }
 

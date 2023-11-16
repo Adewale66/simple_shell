@@ -15,9 +15,8 @@ int handle_file(char *filename, char *program_name)
 	if (file_access == 0)
 		return (parse_file(filename, program_name));
 	write(STDERR_FILENO, program_name, _strlen(program_name));
-	write(STDERR_FILENO, ": 0: cannot open ", 17);
+	write(STDERR_FILENO, ": 0: Can't open ", 16);
 	write(STDERR_FILENO, filename, _strlen(filename));
-	write(STDERR_FILENO, ": No such file", 14);
 	write(STDERR_FILENO, "\n", 1);
 
 	return (2);
