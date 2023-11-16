@@ -73,7 +73,7 @@ void create_file(void)
 	int fd;
 	ssize_t bytes;
 
-	fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0777);
 	if (fd == -1)
 	{
 		perror("open");
