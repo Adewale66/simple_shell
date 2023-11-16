@@ -35,10 +35,9 @@ int shell_env(void)
 	pid_t pid;
 	char *file = "env.sh";
 	int status;
+	char *args[] = {"env", NULL};
 
 	create_file();
-
-	char *args[] = {"env", NULL};
 
 	pid = fork();
 	if (pid == 0)
